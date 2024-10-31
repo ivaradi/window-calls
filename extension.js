@@ -76,6 +76,9 @@ const MR_DBUS_IFACE = `
       <method name="Activate">
          <arg type="u" direction="in" name="winid" />
       </method>
+      <method name="Stick">
+         <arg type="u" direction="in" name="winid" />
+      </method>
       <method name="Close">
          <arg type="u" direction="in" name="winid" />
       </method>
@@ -290,6 +293,15 @@ export default class Extension {
     let win = this._get_window_by_wid(winid).meta_window;
     if (win) {
       win.activate(0);
+    } else {
+      throw new Error('Not found');
+    }
+  }
+
+  Stick(winid) {
+    let win = this._get_window_by_wid(winid).meta_window;
+    if (win) {
+      win.stick();
     } else {
       throw new Error('Not found');
     }
