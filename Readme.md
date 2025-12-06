@@ -37,6 +37,7 @@ Call returns list of window properties. Example output:
     "x": 10,
     "y": 50,
     "in_current_workspace": false,
+    "workspace": 0,
     "monitor": 0
   }
 ]
