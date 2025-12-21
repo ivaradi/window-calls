@@ -154,8 +154,16 @@ export default class Extension {
     };
 
     const winJsonArr = win.map(w => {
+      const ws = w.meta_window.get_workspace();
+      // The default is -1 in case the get_workspace() call fails
+      let ws_index = -1;
+      if (ws) {
+        ws_index = ws.index();
+      }
+
       const win = {
-        in_current_workspace: w.meta_window.located_on_workspace?.(workspaceManager.get_active_workspace?.())
+        in_current_workspace: w.meta_window.located_on_workspace?.(workspaceManager.get_active_workspace?.()),
+        workspace: ws_index
       };
       props.get.forEach(name => win[name] = w.meta_window[`get_${name}`]?.());
       props.has.forEach(name => win[name] = w.meta_window[`has_${name}`]?.());
